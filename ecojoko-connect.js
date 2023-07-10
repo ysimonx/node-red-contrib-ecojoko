@@ -36,8 +36,7 @@ module.exports = function(RED) {
         function fetchData() {
            
             var ecojoko =  new Ecojoko(node.e_mail,  node.password);
-            var ecojoko =  new Ecojoko("yannick.simon@gmail.com", "rs9f!T9rbKMv!BZV*VPi");
-        
+           
             ecojoko.getLoginCookies()
                 .then(async  => {  
                     gateways = ecojoko.getGateways()
