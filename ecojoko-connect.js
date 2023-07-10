@@ -1,66 +1,70 @@
 var https = require('https'),
     urllib = require("url");
  
-const {  Ecoflow } = require("./ecoflow.js");
+const {  Ecojoko } = require("./ecojoko.js");
 
 
 
 module.exports = function(RED) {
 
     
-    function ecoflowCredentials(n) {
+    function ecojokoCredentials(n) {
         RED.nodes.createNode(this, n);
 
         var node = this;
-        this.serial_number = n.serial_number;
-        this.app_key = n.app_key;
-        this.secret_key = n.secret_key;
+        this.e_mail = n.e_mail;
+        this.password = n.password;
         
     }
 
-    RED.nodes.registerType("ecoflow-credential", ecoflowCredentials);
+    RED.nodes.registerType("ecojoko-credential", ecojokoCredentials);
     
 
 
 
-    function ecoflowConnectNode(n) {
+    function ecojokoConnectNode(n) {
 
         RED.nodes.createNode(this, n);
 
         var node = this;
         node.credentials = RED.nodes.getNode(n.server);
 
-        node.serial_number = node.credentials.serial_number;
-        node.app_key = node.credentials.app_key;
-        node.secret_key = node.credentials.secret_key;
+        node.e_mail = node.credentials.e_mail;
+        node.password = node.credentials.password;
         
 
         function fetchData() {
            
-            var ecoflow =  new Ecoflow(node.serial_number,node.app_key, node.secret_key);
-
-           
-            ecoflow.getDeviceInfo()
-            .then(deviceInfo => {
-                node.send(deviceInfo);
-                node.status({});
-            }).catch(err => {
-                node.error(msg.error);
-                node.status({ fill: "red", shape: "dot", text: "error" });
-                return;
-            });
-
-          
+            var ecojoko =  new Ecojoko(node.e_mail,  node.password);
+            var ecojoko =  new Ecojoko("yannick.simon@gmail.com", "rs9f!T9rbKMv!BZV*VPi");
+        
+            ecojoko.getLoginCookies()
+                .then(async  => {  
+                    gateways = ecojoko.getGateways()
+                    .then(async gateways => {
+                        node.send(gateways);
+                        node.status({});
+                    }).catch(err => {
+                        console.error(err);
+                        node.status({ fill: "red", shape: "dot", text: "error" });
+                        return;
+                    });
+                }
+                ).catch(err => {
+                    console.error(err);
+                    node.status({ fill: "red", shape: "dot", text: "error" });
+                    return;
+                })
             
-            }
+        }
 
-            node.on("close", function(){
-            
-            });
+        node.on("close", function(){
+        
+        });
 
-            node.on("input", function(){
-                fetchData();
-            });
+        node.on("input", function(){
+            fetchData();
+        });
 
         
     }
@@ -68,6 +72,6 @@ module.exports = function(RED) {
 
 
 
-    RED.nodes.registerType("ecoflow-connect", ecoflowConnectNode);
+    RED.nodes.registerType("ecojoko-connect", ecojokoConnectNode);
 
 };

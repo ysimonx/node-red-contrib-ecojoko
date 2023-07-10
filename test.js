@@ -1,19 +1,21 @@
 var https = require('https'),
     urllib = require("url");
     
-const {  Ecoflow } = require("./ecoflow.js");
+const {  Ecojoko } = require("./ecojoko.js");
 
 
 function main() {
 
     
-        var device =  new Ecoflow("SERIALXXXX","APPKEYYYYYY", "SECRETKEYZZZZZZ");
-
+        var ecojoko =  new Ecojoko("yannick.simon@gmail.com", "rs9f!T9rbKMv!BZV*VPix");
       
-        device.getDeviceInfo()
-            .then(async result => {
+        ecojoko.getLoginCookies()
+            .then(async  => {  
+               gateways = ecojoko.getGateways()
+               .then(async gateways => {
+                console.log(gateways);
+               });
                
-               console.log(JSON.stringify(result, null, 2));
             }
             ).catch(err => {
                 console.error(err);

@@ -1,29 +1,25 @@
 <script type="text/javascript">
-  RED.nodes.registerType('ecoflow-credential',{
+  RED.nodes.registerType('ecojoko-credential',{
       category: 'config',
       defaults: {
-          serial_number: {value:"serial_number",required:true},
-          app_key: {value:"app_key",required:true},
-          secret_key: {value:"app_key",required:true},
+        e_mail: {value:"e_mail",required:true},
+        password: {value:"password",required:true}
+        
       },
       label: function() {
-          return "credentials for " + this.serial_number;
+          return "credentials for " + this.e_mail;
       }
   });
 </script>
 
-<script type="text/html" data-template-name="ecoflow-credential">
+<script type="text/html" data-template-name="ecojoko-credential">
   <div class="form-row">
-      <label for="node-config-input-serial_number"><i class="fa fa-bookmark"></i> serial_number</label>
-      <input type="text" id="node-config-input-serial_number">
+      <label for="node-config-input-e_mail"><i class="fa fa-bookmark"></i> e-mail</label>
+      <input type="text" id="node-config-input-e_mail">
   </div>
   <div class="form-row">
-      <label for="node-config-input-app_key"><i class="fa fa-bookmark"></i> app_key</label>
-      <input type="text" id="node-config-input-app_key">
-  </div>
-  <div class="form-row">
-    <label for="node-config-input-secret_key"><i class="fa fa-bookmark"></i> secret_key</label>
-    <input type="text" id="node-config-input-secret_key">
+    <label for="node-config-input-password"><i class="fa fa-bookmark"></i> password</label>
+    <input type="text" id="node-config-input-password">
   </div>
 </script>
 
@@ -31,23 +27,23 @@
 
 
 <script type="text/javascript">
-  RED.nodes.registerType("ecoflow-connect", {
+  RED.nodes.registerType("ecojoko-connect", {
     category: "input",
     color: "#ffcc66",
     defaults: {
-      server: {value:"", type:"ecoflow-credential", required: true},
+      server: {value:"", type:"ecojoko-credential", required: true},
       command: { value:"getDeviceInfo" },
     },
     inputs: 1,
     outputs: 1,
     icon: "feed.png",
     label: function() {
-      return "ecoflow-connect";
+      return "ecojoko-connect";
     }
   });
 </script>
 
-<script type="text/x-red" data-template-name="ecoflow-connect">
+<script type="text/x-red" data-template-name="ecojoko-connect">
     <div class="form-row">
         <label for="node-input-server"><i class="fa fa-globe"></i> Credentials</label>
         <input type="text" id="node-input-server" />
