@@ -37,11 +37,15 @@ module.exports = function(RED) {
            
             var ecojoko =  new Ecojoko(node.e_mail,  node.password);
            
+            var msg={};
+
             ecojoko.getLoginCookies()
                 .then(async  => {  
                     gateways = ecojoko.getGateways()
                     .then(async gateways => {
-                        node.send(gateways);
+                        msg.payload = JSON.parse(gateways); 
+                        msg.error = "";
+                        node.send(msg);
                         node.status({});
                     }).catch(err => {
                         console.error(err);

@@ -50,7 +50,7 @@ class Ecojoko {
                       
                         if (res.statusCode == 200) {
                             var payload_json = JSON.parse(payload); 
-                            resolve(payload);
+                            resolve(payload_json);
                         }
                         reject("error");
                     }
