@@ -51,6 +51,7 @@ class Ecojoko {
                         if (res.statusCode == 200) {
                             var payload_json = JSON.parse(payload); 
                             resolve(payload_json);
+                            return;
                         }
                         reject("error");
                     }
@@ -160,8 +161,8 @@ function cookieParse(arrayString) {
     // should return
     /*
     {
-        LKS: 'eacfdf748deeff092cc661bf857de104',
-        tdw: 'b2ae800d2d0f08824d280786a11d7d70'
+        LKS: 'eacfdf748deeff092cc661bf857de103',
+        tdw: 'b2ae800d2d0f08824d280786a11d7d71'
       }
     */
 
