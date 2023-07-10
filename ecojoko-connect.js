@@ -43,7 +43,7 @@ module.exports = function(RED) {
                 .then(async  => {  
                     gateways = ecojoko.getGateways()
                     .then(async gateways => {
-                        msg.payload = JSON.parse(gateways); 
+                        msg.payload = gateways; 
                         msg.error = "";
                         node.send(msg);
                         node.status({});
