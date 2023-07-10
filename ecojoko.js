@@ -3,7 +3,6 @@
 var https = require('https'),
     urllib = require("url");
 
-const cookieParser = require('cookie-parser');
 
 // constructor function for the Cat class
 class Ecojoko {
