@@ -47,19 +47,17 @@ class Ecojoko {
                 });
 
                 res.on("end",function() {
-                    // try {
-                        var payload_json = JSON.parse(payload); 
-                        
+                    try {
+                      
                         if (res.statusCode == 200) {
-                               
-                                resolve(payload_json);
+                            var payload_json = JSON.parse(payload); 
+                            resolve(payload);
                         }
                         reject("error");
-                    // }
-                    //catch(e) { 
-                    //    
-                    //    reject(e);
-                    // }
+                    }
+                    catch(e) { 
+                        reject(e);
+                    }
                 });
 
         });     
