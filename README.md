@@ -8,16 +8,15 @@ In credentials settings, you must provide :
 - password
 
 
-exemple : 
+exemple with a command-line : 
 
-try {
-    var { Ecojoko } = require("./ecojoko.js");
-    // do stuff
-} catch (ex) {
-    var { Ecojoko } = require("./node_modules/node-red-contrib-ecojoko/ecojoko.js");
-}
-
-function main() {
+    try {
+        var { Ecojoko } = require("./ecojoko.js");
+    } catch (ex) {
+        var { Ecojoko } = require("./node_modules/node-red-contrib-ecojoko/ecojoko.js");
+    }
+    
+    function main() {
 
     
         var ecojoko =  new Ecojoko("yannick.simon@gmail.com", "rs9f!T9rbKMv!BZV*VPix");
@@ -34,6 +33,6 @@ function main() {
                 console.error(err);
                 return;
             })
-}
-
-main()
+    }
+    
+    main()
