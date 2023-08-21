@@ -1,8 +1,9 @@
-var https = require('https'),
-    urllib = require("url");
-    
-const {  Ecojoko } = require("./ecojoko.js");
-
+try {
+    var { Ecojoko } = require("./ecojoko.js");
+    // do stuff
+} catch (ex) {
+    var { Ecojoko } = require("./node_modules/node-red-contrib-ecojoko/ecojoko.js");
+}
 
 function main() {
 
@@ -13,7 +14,7 @@ function main() {
             .then(async  => {  
                gateways = ecojoko.getGateways()
                .then(async gateways => {
-                console.log(gateways);
+                console.log(JSON.stringify(gateways, null, 4));
                });
                
             }
@@ -23,4 +24,4 @@ function main() {
             })
 }
 
-main();
+main()
